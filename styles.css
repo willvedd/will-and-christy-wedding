@@ -3,7 +3,7 @@
    =================================== */
 :root {
     --primary: #25364b;
-    --light: #fefaf1;
+    --light: #fdf9f1;
     --tertiary: #ad2527;
     --white: var(--light);
     --hero-overlay: rgba(0, 0, 0, 0.4);
@@ -100,7 +100,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('images/hero-1.jpg');
+    background-image: url('images/hero-1.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
