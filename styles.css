@@ -2,13 +2,11 @@
    CSS Variables - Color Palette
    =================================== */
 :root {
-    --primary-dark-teal: #006D77;
-    --medium-teal: #83C5BE;
-    --light-blue: #EDF6F9;
-    --light-coral: #FFDDD2;
-    --warm-terracotta: #E29578;
-    --white: #FFFFFF;
-    --overlay-dark: rgba(0, 0, 0, 0.4);
+    --primary: #25364b;
+    --light: #fefaf1;
+    --tertiary: #ad2527;
+    --white: var(--light);
+    --hero-overlay: rgba(0, 0, 0, 0.4);
 }
 
 /* ===================================
@@ -40,7 +38,7 @@ a {
    Navigation Bar
    =================================== */
 .navbar {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -78,7 +76,7 @@ a {
 
 .cta-button {
     background-color: var(--white);
-    color: var(--primary-dark-teal);
+    color: var(--primary);
     padding: 0.75rem 1.5rem;
     border-radius: 4px;
     font-weight: 500;
@@ -114,7 +112,7 @@ a {
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--overlay-dark);
+    background: var(--hero-overlay);
 }
 
 .hero-content {
@@ -164,7 +162,7 @@ a {
    =================================== */
 .address-section {
     padding: 5rem 2rem;
-    background-color: var(--light-blue);
+    background-color: var(--light);
     text-align: center;
 }
 
@@ -175,27 +173,20 @@ a {
 
 .address-section h2 {
     font-size: 2.5rem;
-    color: var(--primary-dark-teal);
+    color: var(--primary);
     margin-bottom: 1.5rem;
 }
 
 .address-section p {
     font-size: 1.1rem;
-    color: #555;
     margin-bottom: 2rem;
 }
 
-.form-placeholder {
-    background-color: var(--white);
-    padding: 3rem;
+.google-form {
     border-radius: 8px;
     margin: 2rem 0;
-    border: 2px dashed var(--medium-teal);
-}
-
-.form-placeholder p {
-    color: var(--medium-teal);
-    font-style: italic;
+    max-width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .contact-note {
@@ -204,20 +195,20 @@ a {
 }
 
 .contact-note a {
-    color: var(--primary-dark-teal);
+    color: var(--primary);
     font-weight: 500;
     text-decoration: underline;
 }
 
 .contact-note a:hover {
-    color: var(--warm-terracotta);
+    color: var(--tertiary);
 }
 
 /* ===================================
    Footer
    =================================== */
 .footer {
-    background-color: var(--primary-dark-teal);
+    background-color: var(--primary);
     color: var(--white);
     text-align: center;
     padding: 2rem;
@@ -268,8 +259,8 @@ a {
         font-size: 2rem;
     }
 
-    .form-placeholder {
-        padding: 2rem 1rem;
+    .google-form {
+        height: 700px;
     }
 }
 
@@ -302,5 +293,9 @@ a {
 
     .hero-date {
         font-size: 1.1rem;
+    }
+
+    .google-form {
+        height: 600px;
     }
 }
