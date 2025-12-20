@@ -287,6 +287,41 @@ a {
     font-weight: bold;
 }
 
+.halloween-card {
+    position: relative;
+    overflow: visible;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+.halloween-card .card-content {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 2;
+}
+
+.halloween-card:hover .mike-easter-egg{
+    top: -46px;
+    left: -38px;
+}
+
+.mike-easter-egg {
+    transition: .25s ease-in-out;
+    top: 0;
+    left: 10px;
+    position: absolute;
+    width: 80px;
+    height: auto;
+    transform: rotate(-35deg);
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+}
+
 /* ===================================
    Address Collection Section
    =================================== */
