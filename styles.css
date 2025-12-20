@@ -1,0 +1,306 @@
+/* ===================================
+   CSS Variables - Color Palette
+   =================================== */
+:root {
+    --primary-dark-teal: #006D77;
+    --medium-teal: #83C5BE;
+    --light-blue: #EDF6F9;
+    --light-coral: #FFDDD2;
+    --warm-terracotta: #E29578;
+    --white: #FFFFFF;
+    --overlay-dark: rgba(0, 0, 0, 0.4);
+}
+
+/* ===================================
+   Global Styles
+   =================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ===================================
+   Navigation Bar
+   =================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    z-index: 1000;
+    background: transparent;
+}
+
+.nav-left,
+.nav-center,
+.nav-right {
+    flex: 1;
+}
+
+.nav-center {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 2px;
+}
+
+.cta-button {
+    background-color: var(--white);
+    color: var(--primary-dark-teal);
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: 2px solid var(--white);
+}
+
+.cta-button:hover {
+    background-color: transparent;
+    color: var(--white);
+    border-color: var(--white);
+}
+
+/* ===================================
+   Hero Section
+   =================================== */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('images/hero-1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--overlay-dark);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: var(--white);
+    padding: 2rem;
+}
+
+.hero-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 6rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.hero-date {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+}
+
+.hero-location {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    line-height: 1.8;
+}
+
+/* ===================================
+   Address Collection Section
+   =================================== */
+.address-section {
+    padding: 5rem 2rem;
+    background-color: var(--light-blue);
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.address-section h2 {
+    font-size: 2.5rem;
+    color: var(--primary-dark-teal);
+    margin-bottom: 1.5rem;
+}
+
+.address-section p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.form-placeholder {
+    background-color: var(--white);
+    padding: 3rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+    border: 2px dashed var(--medium-teal);
+}
+
+.form-placeholder p {
+    color: var(--medium-teal);
+    font-style: italic;
+}
+
+.contact-note {
+    font-size: 0.95rem;
+    margin-top: 2rem;
+}
+
+.contact-note a {
+    color: var(--primary-dark-teal);
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.contact-note a:hover {
+    color: var(--warm-terracotta);
+}
+
+/* ===================================
+   Footer
+   =================================== */
+.footer {
+    background-color: var(--primary-dark-teal);
+    color: var(--white);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+}
+
+/* ===================================
+   Responsive Design - Mobile
+   =================================== */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    .cta-button {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+        letter-spacing: 2px;
+    }
+
+    .hero-date {
+        font-size: 1.3rem;
+    }
+
+    .hero-location {
+        font-size: 0.95rem;
+    }
+
+    .address-section {
+        padding: 3rem 1.5rem;
+    }
+
+    .address-section h2 {
+        font-size: 2rem;
+    }
+
+    .form-placeholder {
+        padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 1rem;
+    }
+
+    .nav-left {
+        display: none;
+    }
+
+    .nav-center,
+    .nav-right {
+        flex: 1;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .cta-button {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.75rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-date {
+        font-size: 1.1rem;
+    }
+}
