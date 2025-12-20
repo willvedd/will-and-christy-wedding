@@ -264,7 +264,7 @@ a {
 }
 
 .detail-card.coming-soon {
-    border: 2px dashed var(--primary);
+    border: 2px dashed #cfc5b6;
 }
 
 .detail-card ul {
