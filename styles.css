@@ -408,6 +408,8 @@ a {
     .hero-title {
         font-size: 3rem;
         letter-spacing: 2px;
+        /* idk why but it looks not centered horizontally. I measured it and it actually is centered. Optical illusion. */
+        transform: translate(1px, 0);
     }
 
     .hero-date {
