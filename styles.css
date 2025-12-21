@@ -7,6 +7,7 @@
     --tertiary: #ad2527;
     --white: #FEFEFE;
     --hero-overlay: rgba(0, 0, 0, 0.4);
+    --border-radius: 4px;
 }
 
 /* ===================================
@@ -78,7 +79,7 @@ a {
     background-color: var(--light);
     color: var(--primary);
     padding: 0.75rem 1.5rem;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     font-weight: 500;
     font-size: 0.95rem;
     transition: all 0.3s ease;
@@ -237,8 +238,8 @@ a {
 .detail-card {
     background-color: var(--white);
     padding: 2rem;
-    border-radius: 3px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
 }
 
 .detail-card h3 {
@@ -305,8 +306,8 @@ a {
 .halloween-card .card-content {
     background-color: var(--white);
     padding: 2rem;
-    border-radius: 3px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
     position: relative;
     z-index: 2;
 }
@@ -349,7 +350,7 @@ a {
 }
 
 .google-form {
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     margin: 2rem 0;
     max-width: 100%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
