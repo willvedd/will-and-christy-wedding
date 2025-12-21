@@ -100,10 +100,16 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('images/hero-1.jpeg');
+    background-image: url('images/hero-1-landscape.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+@media (orientation: portrait) {
+    .hero {
+        background-image: url('images/hero-1-portrait.jpeg');
+    }
 }
 
 .hero::before {

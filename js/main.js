@@ -1,9 +1,18 @@
 // ===================================
 // Configuration
 // ===================================
-const HERO_IMAGES = ['hero-1.jpeg', 'hero-2.jpeg', 'hero-3.jpeg', 'hero-4.jpeg'];
-const CAROUSEL_INTERVAL_MS = 5000; 
-const FADE_DURATION_MS = 500; 
+const HERO_IMAGE_COUNT = 5;
+const CAROUSEL_INTERVAL_MS = 5000;
+const FADE_DURATION_MS = 500;
+
+function getOrientation() {
+    return window.matchMedia('(orientation: portrait)').matches ? 'portrait' : 'landscape';
+}
+
+function getHeroImageUrl(index) {
+    const orientation = getOrientation();
+    return `images/hero-${index + 1}-${orientation}.jpeg`;
+} 
 
 // ===================================
 // Smooth Scroll
@@ -32,12 +41,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     let autoPlayEnabled = true;
     let isTransitioning = false;
 
-    function updateSlide(index) {
+    function updateSlide(index, forceUpdate = false) {
         if (isTransitioning) return;
-        if (index === currentSlide) return;
+        if (index === currentSlide && !forceUpdate) return;
 
         isTransitioning = true;
-        const newImageUrl = `url('images/${HERO_IMAGES[index]}')`;
+        const newImageUrl = `url('${getHeroImageUrl(index)}')`;
 
         const style = document.createElement('style');
         style.textContent = `.hero::before { background-image: ${newImageUrl}; opacity: 1; }`;
@@ -62,7 +71,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
 
     function nextSlide() {
-        const next = (currentSlide + 1) % HERO_IMAGES.length;
+        const next = (currentSlide + 1) % HERO_IMAGE_COUNT;
         updateSlide(next);
     }
 
@@ -82,6 +91,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             stopAutoPlay();
             updateSlide(index);
         });
+    });
+
+    window.matchMedia('(orientation: portrait)').addEventListener('change', () => {
+        updateSlide(currentSlide, true);
     });
 
     startAutoPlay();
