@@ -328,7 +328,7 @@ a {
    Hotel Blocks Section
    =================================== */
 .hotel-section {
-    padding: 5rem 2rem;
+    padding: 3rem 2rem 5rem 2rem;
     background-color: var(--light);
     text-align: center;
 }
@@ -473,7 +473,7 @@ a {
     }
 
     .hotel-section {
-        padding: 3rem 1.5rem;
+        padding: 2rem 1.5rem;
     }
 
     .hotel-section h2 {
