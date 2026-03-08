@@ -325,9 +325,9 @@ a {
 }
 
 /* ===================================
-   Address Collection Section
+   Hotel Blocks Section
    =================================== */
-.address-section {
+.hotel-section {
     padding: 5rem 2rem;
     background-color: var(--light);
     text-align: center;
@@ -338,22 +338,74 @@ a {
     margin: 0 auto;
 }
 
-.address-section h2 {
+.hotel-section h2 {
     font-size: 2.5rem;
     color: var(--primary);
     margin-bottom: 1.5rem;
 }
 
-.address-section p {
+.hotel-section > .container > p {
     font-size: 1.1rem;
     margin-bottom: 2rem;
 }
 
-.google-form {
+.hotel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.hotel-card {
+    background-color: var(--white);
+    padding: 2rem;
     border-radius: var(--border-radius);
-    margin: 2rem 0;
-    max-width: 100%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+}
+
+.hotel-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+}
+
+.hotel-highlight {
+    color: var(--tertiary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.hotel-card p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    color: #333;
+}
+
+.hotel-book-button {
+    display: inline-block;
+    background-color: var(--primary);
+    color: var(--light);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary);
+}
+
+.hotel-book-button:hover {
+    background-color: transparent;
+    color: var(--primary);
+}
+
+.hotel-coming-soon {
+    display: inline-block;
+    font-style: italic;
+    color: #999;
+    font-size: 0.9rem;
+    padding: 0.75rem 0;
 }
 
 .contact-note {
@@ -420,16 +472,16 @@ a {
         font-size: 0.95rem;
     }
 
-    .address-section {
+    .hotel-section {
         padding: 3rem 1.5rem;
     }
 
-    .address-section h2 {
+    .hotel-section h2 {
         font-size: 2rem;
     }
 
-    .google-form {
-        height: 700px;
+    .hotel-grid {
+        grid-template-columns: 1fr;
     }
 
     .details-section {
@@ -495,8 +547,8 @@ a {
         font-size: 1.1rem;
     }
 
-    .google-form {
-        height: 600px;
+    .hotel-card {
+        padding: 1.5rem;
     }
 
     .details-section {
