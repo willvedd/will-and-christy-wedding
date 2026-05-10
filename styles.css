@@ -216,7 +216,7 @@ a {
    Event Details Section
    =================================== */
 .details-section {
-    padding: 5rem 2rem;
+    padding: 3rem 2rem;
     background-color: var(--light);
 }
 
@@ -325,70 +325,130 @@ a {
 }
 
 /* ===================================
-   Registry Section
+   Schedule Section
    =================================== */
-.registry-section {
-    padding: 3rem 2rem;
+.schedule-section {
+    padding: 5rem 2rem 3rem 2rem;
     background-color: var(--light);
     text-align: center;
 }
 
-.registry-section h2 {
+.schedule-section h2 {
     font-size: 2.5rem;
     color: var(--primary);
     margin-bottom: 1.5rem;
 }
 
-.registry-section > .container > p {
+.schedule-section > .container > p {
     font-size: 1.1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
-.registry-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+.schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: left;
 }
 
-.registry-card {
+.schedule-item {
     background-color: var(--white);
     padding: 2rem;
     border-radius: var(--border-radius);
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.schedule-item-highlight {
+    border-left: 4px solid var(--tertiary);
+}
+
+.schedule-date {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
+    text-align: center;
+    padding-right: 2rem;
+    border-right: 1px solid #e5dfd2;
 }
 
-.registry-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--primary);
+.schedule-day {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--primary);
+    font-weight: 600;
 }
 
-.registry-card h3 {
+.schedule-month {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    color: var(--tertiary);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+}
+
+.schedule-details h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
     color: var(--primary);
-    margin: 0;
+    margin-bottom: 0.5rem;
 }
 
-.registry-link-label {
+.schedule-time {
     color: var(--tertiary);
     font-weight: 500;
+    margin-bottom: 0.25rem !important;
+}
+
+.schedule-location {
+    color: #333;
+    margin-bottom: 0.25rem !important;
+}
+
+.schedule-note {
     font-size: 0.9rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 0 !important;
+}
+
+/* ===================================
+   Registry Card
+   =================================== */
+.registry-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.registry-link {
+    display: block;
+    background-color: var(--primary);
+    color: var(--light);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary);
+}
+
+.registry-link:hover {
+    background-color: transparent;
+    color: var(--primary);
 }
 
 /* ===================================
    Hotel Blocks Section
    =================================== */
 .hotel-section {
-    padding: 3rem 2rem 5rem 2rem;
+    padding: 3rem 2rem 4rem 2rem;
     background-color: var(--light);
     text-align: center;
 }
@@ -470,7 +530,7 @@ a {
 
 .contact-note {
     font-size: 0.95rem;
-    margin-top: 2rem;
+    margin-top: 3rem;
 }
 
 .contact-note a {
@@ -544,16 +604,36 @@ a {
         grid-template-columns: 1fr;
     }
 
-    .registry-section {
-        padding: 2rem 1.5rem;
+    .schedule-section {
+        padding: 3rem 1.5rem 2rem 1.5rem;
     }
 
-    .registry-section h2 {
+    .schedule-section h2 {
         font-size: 2rem;
     }
 
-    .registry-grid {
+    .schedule-item {
         grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+
+    .schedule-date {
+        flex-direction: row;
+        justify-content: center;
+        gap: 0.5rem;
+        padding-right: 0;
+        padding-bottom: 1rem;
+        border-right: none;
+        border-bottom: 1px solid #e5dfd2;
+    }
+
+    .schedule-month {
+        margin-top: 0;
+    }
+
+    .schedule-details h3 {
+        font-size: 1.3rem;
     }
 
     .details-section {
@@ -620,10 +700,6 @@ a {
     }
 
     .hotel-card {
-        padding: 1.5rem;
-    }
-
-    .registry-card {
         padding: 1.5rem;
     }
 
