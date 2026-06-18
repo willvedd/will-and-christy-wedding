@@ -724,3 +724,310 @@ a {
         font-size: 1.2rem;
     }
 }
+
+/* ===================================
+   RSVP Page
+   =================================== */
+.rsvp-body {
+    background-color: var(--light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-solid {
+    position: relative;
+    background-color: var(--primary);
+}
+
+.logo-dark {
+    color: var(--light);
+}
+
+.cta-button-dark {
+    background-color: transparent;
+    color: var(--light);
+    border-color: var(--light);
+}
+
+.cta-button-dark:hover {
+    background-color: var(--light);
+    color: var(--primary);
+}
+
+.rsvp-hero {
+    background-color: var(--primary);
+    color: var(--light);
+    text-align: center;
+    padding: 3rem 2rem 4rem 2rem;
+}
+
+.rsvp-hero-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0.85;
+}
+
+.rsvp-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    line-height: 1;
+}
+
+.rsvp-main {
+    flex: 1;
+    padding: 3rem 2rem 4rem 2rem;
+}
+
+.rsvp-card {
+    background-color: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.rsvp-card h2 {
+    font-size: 1.75rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--tertiary);
+    padding-bottom: 0.5rem;
+}
+
+.rsvp-card p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.rsvp-card p:last-child {
+    margin-bottom: 0;
+}
+
+.rsvp-form {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.rsvp-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: -0.75rem;
+}
+
+.rsvp-input,
+.rsvp-textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    color: #333;
+    background-color: var(--light);
+    border: 1px solid #d9d2c4;
+    border-radius: var(--border-radius);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rsvp-input:focus,
+.rsvp-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 54, 75, 0.12);
+}
+
+.rsvp-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.rsvp-button {
+    background-color: var(--primary);
+    color: var(--light);
+    padding: 0.85rem 1.75rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.5px;
+    border: 2px solid var(--primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+}
+
+.rsvp-button:hover:not(:disabled) {
+    background-color: transparent;
+    color: var(--primary);
+}
+
+.rsvp-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.rsvp-button-link {
+    display: inline-block;
+    text-align: center;
+}
+
+.rsvp-text-link {
+    color: var(--primary);
+    text-decoration: underline;
+    font-size: 0.95rem;
+}
+
+.rsvp-text-link:hover {
+    color: var(--tertiary);
+}
+
+.rsvp-inline-error {
+    color: var(--tertiary);
+    font-size: 0.95rem;
+    margin-top: -0.5rem;
+}
+
+.rsvp-event {
+    border: none;
+    border-top: 1px solid #e5dfd2;
+    padding: 1.5rem 0 0 0;
+    margin: 0;
+}
+
+.rsvp-event:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+.rsvp-event-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    padding: 0;
+}
+
+.rsvp-event-meta {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 1rem !important;
+}
+
+.rsvp-people {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.rsvp-person {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.rsvp-person-name {
+    font-weight: 500;
+    color: var(--primary);
+}
+
+.rsvp-choices {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.rsvp-choice {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1.1rem;
+    border: 1px solid #d9d2c4;
+    border-radius: var(--border-radius);
+    background-color: var(--light);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+}
+
+.rsvp-choice input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.rsvp-choice:hover {
+    border-color: var(--primary);
+}
+
+.rsvp-choice:has(input:checked) {
+    background-color: var(--primary);
+    color: var(--light);
+    border-color: var(--primary);
+}
+
+.rsvp-choice:focus-within {
+    box-shadow: 0 0 0 3px rgba(37, 54, 75, 0.18);
+}
+
+@media (max-width: 600px) {
+    .rsvp-hero {
+        padding: 2rem 1.5rem 3rem 1.5rem;
+    }
+
+    .rsvp-hero-title {
+        font-size: 3rem;
+        letter-spacing: 2px;
+    }
+
+    .rsvp-main {
+        padding: 2rem 1rem 3rem 1rem;
+    }
+
+    .rsvp-card {
+        padding: 1.5rem;
+    }
+
+    .rsvp-card h2 {
+        font-size: 1.4rem;
+    }
+
+    .rsvp-event-title {
+        font-size: 1.2rem;
+    }
+
+    .rsvp-person {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .rsvp-choices {
+        width: 100%;
+    }
+
+    .rsvp-choice {
+        flex: 1;
+        min-width: 0;
+        padding: 0.6rem 0.5rem;
+    }
+
+    .rsvp-button {
+        width: 100%;
+    }
+}

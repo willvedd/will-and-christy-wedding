@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP | Will & Christy</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="rsvp-body">
+    <nav class="navbar navbar-solid">
+        <div class="nav-left"></div>
+        <div class="nav-center">
+            <a href="index.html" class="logo logo-dark">W&C</a>
+        </div>
+        <div class="nav-right">
+            <a href="index.html" class="cta-button cta-button-dark">Home</a>
+        </div>
+    </nav>
+
+    <section class="rsvp-hero">
+        <div class="container">
+            <p class="rsvp-hero-subtitle">October 30, 2026 &middot; Philadelphia</p>
+            <h1 class="rsvp-hero-title">RSVP</h1>
+        </div>
+    </section>
+
+    <main class="rsvp-main">
+        <div class="container">
+
+            <section id="lookup-section" class="rsvp-card">
+                <h2>Find your invitation</h2>
+                <p>Enter your full name or your guest's full name as it appears on your invitation.</p>
+                <form id="lookup-form" class="rsvp-form" novalidate>
+                    <label for="lookup-name" class="rsvp-label">Your full name</label>
+                    <input type="text" id="lookup-name" name="lookup-name" class="rsvp-input" autocomplete="name" required>
+                    <button type="submit" class="rsvp-button" id="lookup-button">Find my invitation</button>
+                </form>
+                <p id="lookup-error" class="rsvp-inline-error" hidden></p>
+            </section>
+
+            <section id="form-section" class="rsvp-card" hidden>
+                <h2 id="form-greeting">Welcome</h2>
+                <p>Please let us know who will be attending each event. We're so excited to celebrate with you.</p>
+                <form id="rsvp-form" class="rsvp-form" novalidate>
+
+                    <fieldset class="rsvp-event">
+                        <legend class="rsvp-event-title">The Wedding</legend>
+                        <p class="rsvp-event-meta">Friday, October 30 &middot; XIX Nineteen at The Bellevue</p>
+                        <div class="rsvp-people" id="reception-people"></div>
+                    </fieldset>
+
+                    <fieldset class="rsvp-event" id="welcome-event" hidden>
+                        <legend class="rsvp-event-title">Welcome Drinks</legend>
+                        <p class="rsvp-event-meta">Thursday, October 29 &middot; 6:00 PM &ndash; 8:30 PM &middot; Spice Finch</p>
+                        <div class="rsvp-people" id="welcome-people"></div>
+                    </fieldset>
+
+                    <fieldset class="rsvp-event">
+                        <legend class="rsvp-event-title">Farewell Brunch & Bowling</legend>
+                        <p class="rsvp-event-meta">Saturday, October 31 &middot; 10:00 AM &ndash; 1:00 PM &middot; Harp & Crown</p>
+                        <div class="rsvp-people" id="brunch-people"></div>
+                    </fieldset>
+
+                    <fieldset class="rsvp-event">
+                        <legend class="rsvp-event-title">RSVP note</legend>
+                        <p class="rsvp-event-meta">Optional &mdash; anything else we should know?</p>
+                        <textarea id="rsvp-note" name="rsvp-note" class="rsvp-textarea" rows="4" maxlength="2000"></textarea>
+                    </fieldset>
+
+                    <button type="submit" class="rsvp-button" id="submit-button">Submit RSVP</button>
+                    <p id="submit-error" class="rsvp-inline-error" hidden></p>
+                </form>
+            </section>
+
+            <section id="already-section" class="rsvp-card" hidden>
+                <h2>You've already RSVPed</h2>
+                <p>It looks like an RSVP has already been submitted for your household. If you need to make a change, please email us and we'll take care of it.</p>
+                <p><a href="mailto:will.and.christy.wedding@gmail.com" class="rsvp-button rsvp-button-link">Email us</a></p>
+                <p><a href="#" id="back-to-lookup" class="rsvp-text-link">Look up a different name</a></p>
+            </section>
+
+            <section id="confirmation-section" class="rsvp-card" hidden>
+                <h2>Thank you!</h2>
+                <p id="confirmation-message">We've received your RSVP. We can't wait to celebrate with you.</p>
+                <p>If anything changes, just email us at <a href="mailto:will.and.christy.wedding@gmail.com">will.and.christy.wedding@gmail.com</a>.</p>
+                <p><a href="index.html" class="rsvp-button rsvp-button-link">Back to home</a></p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Will & Christy | October 30, 2026</p>
+    </footer>
+
+    <script src="js/rsvp.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J6Q03JNS0K"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-J6Q03JNS0K');</script>
+</body>
+</html>
