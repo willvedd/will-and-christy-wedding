@@ -15,14 +15,28 @@ const COLUMN_MAP = {
   submitted_at:        'RSVP Submitted At',
 };
 
+function logEvent(level, event, details) {
+  const entry = JSON.stringify(Object.assign({ event: event, at: new Date().toISOString() }, details || {}));
+  if (level === 'error') console.error(entry);
+  else if (level === 'warn') console.warn(entry);
+  else console.info(entry);
+}
+
 function doPost(e) {
+  let action = 'unknown';
   try {
     const payload = JSON.parse(e.postData.contents);
-    const action = payload.action;
+    action = payload.action;
     if (action === 'lookup') return jsonResponse(handleLookup(payload.name));
     if (action === 'submit') return jsonResponse(handleSubmit(payload));
+    logEvent('error', 'unknown_action', { action: action });
     return jsonResponse({ error: 'Unknown action: ' + action });
   } catch (err) {
+    logEvent('error', 'request_failed', {
+      action: action,
+      error: String(err && err.message || err),
+      stack: String(err && err.stack || ''),
+    });
     return jsonResponse({ error: String(err && err.message || err) });
   }
 }
@@ -93,7 +107,10 @@ function isTruthy(v) {
 }
 
 function handleLookup(name) {
-  if (!name || !String(name).trim()) return { found: false };
+  if (!name || !String(name).trim()) {
+    logEvent('warn', 'lookup_failed', { reason: 'empty_name' });
+    return { found: false };
+  }
   const sheet = getSheet();
   const headers = getHeaderMap(sheet);
   const data = sheet.getDataRange().getValues();
@@ -104,7 +121,7 @@ function handleLookup(name) {
     const secondary = row[headers.secondary_name];
     if (namesMatch(name, primary) || namesMatch(name, secondary)) {
       const submittedAt = row[headers.submitted_at];
-      return {
+      const result = {
         found: true,
         rowIndex: i + 1,
         primary: String(primary || '').trim(),
@@ -112,8 +129,16 @@ function handleLookup(name) {
         welcomeInvited: isTruthy(row[headers.welcome_invited]),
         alreadySubmitted: !!submittedAt,
       };
+      logEvent('info', 'lookup_success', {
+        searched: String(name).trim(),
+        matched: result.primary,
+        rowIndex: result.rowIndex,
+        alreadySubmitted: result.alreadySubmitted,
+      });
+      return result;
     }
   }
+  logEvent('warn', 'lookup_failed', { reason: 'not_found', searched: String(name).trim() });
   return { found: false };
 }
 
@@ -121,17 +146,37 @@ function handleSubmit(payload) {
   const sheet = getSheet();
   const headers = getHeaderMap(sheet);
   const rowIndex = Number(payload.rowIndex);
-  if (!rowIndex || rowIndex < 2) return { success: false, error: 'Invalid row.' };
+  if (!rowIndex || rowIndex < 2) {
+    logEvent('error', 'submit_failed', {
+      reason: 'invalid_row',
+      rowIndex: payload.rowIndex,
+      primaryName: payload.primaryName || '',
+    });
+    return { success: false, error: 'Invalid row.' };
+  }
 
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
     const submittedCol = headers.submitted_at + 1;
     const existing = sheet.getRange(rowIndex, submittedCol).getValue();
-    if (existing) return { success: false, alreadySubmitted: true };
+    if (existing) {
+      logEvent('warn', 'submit_failed', {
+        reason: 'already_submitted',
+        rowIndex: rowIndex,
+        primaryName: payload.primaryName || '',
+      });
+      return { success: false, alreadySubmitted: true };
+    }
 
     const primary = sheet.getRange(rowIndex, headers.primary_name + 1).getValue();
     if (payload.primaryName && normalizeName(payload.primaryName) !== normalizeName(primary)) {
+      logEvent('error', 'submit_failed', {
+        reason: 'row_mismatch',
+        rowIndex: rowIndex,
+        primaryName: payload.primaryName,
+        sheetName: String(primary || '').trim(),
+      });
       return { success: false, error: 'Row mismatch.' };
     }
 
@@ -145,8 +190,24 @@ function handleSubmit(payload) {
     writeCell(sheet, rowIndex, headers.note, payload.note || '');
     sheet.getRange(rowIndex, submittedCol).setValue(new Date());
 
+    logEvent('info', 'submit_success', {
+      rowIndex: rowIndex,
+      primaryName: String(primary || '').trim(),
+      responses: r,
+      hasNote: !!payload.note,
+    });
+
     sendNotification(sheet, rowIndex, headers, payload);
     return { success: true };
+  } catch (err) {
+    logEvent('error', 'submit_failed', {
+      reason: 'exception',
+      rowIndex: rowIndex,
+      primaryName: payload.primaryName || '',
+      error: String(err && err.message || err),
+      stack: String(err && err.stack || ''),
+    });
+    throw err;
   } finally {
     lock.releaseLock();
   }
@@ -192,6 +253,9 @@ function sendNotification(sheet, rowIndex, headers, payload) {
       body: lines.join('\n'),
     });
   } catch (err) {
-    console.error('Notification email failed: ' + err);
+    logEvent('error', 'notification_failed', {
+      rowIndex: rowIndex,
+      error: String(err && err.message || err),
+    });
   }
 }

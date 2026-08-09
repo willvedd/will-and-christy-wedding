@@ -1,4 +1,4 @@
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxwWYiv3nmOHen3X0ltOIlEvavvr1JuzpcR8KM8TpDa6M_n0RuC61tEIDkMrs3RWuYL/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxqHKMZi7pr1dzpmq0VmrRN01ELMwa5I6rRVxWWcxR19wrrrBmEg0Pgs-bGaV5XW-Hl/exec';
 const CONTACT_EMAIL = 'will.and.christy.wedding@gmail.com';
 
 const sections = {
