@@ -85,6 +85,18 @@ function normalizeName(s) {
   return String(s == null ? '' : s).trim().toLowerCase().replace(/\s+/g, ' ');
 }
 
+function namesMatchExact(input, candidate) {
+  const a = normalizeName(input);
+  const b = normalizeName(candidate);
+  return !!a && !!b && a === b;
+}
+
+function firstNamesCompatible(a, b) {
+  if (!a || !b) return false;
+  if (a === b) return true;
+  return a.indexOf(b) === 0 || b.indexOf(a) === 0;
+}
+
 function namesMatch(input, candidate) {
   const a = normalizeName(input);
   const b = normalizeName(candidate);
@@ -95,7 +107,7 @@ function namesMatch(input, candidate) {
   if (aWords.length >= 2 && bWords.length >= 2) {
     const aLast = aWords[aWords.length - 1];
     const bLast = bWords[bWords.length - 1];
-    if (aLast === bLast && aWords[0].charAt(0) === bWords[0].charAt(0)) return true;
+    if (aLast === bLast && firstNamesCompatible(aWords[0], bWords[0])) return true;
   }
   return false;
 }
@@ -106,6 +118,21 @@ function isTruthy(v) {
   return s === 'yes' || s === 'y' || s === 'true' || s === '1' || s === 'x' || s === 'invited';
 }
 
+function findMatches(data, headers, name, matcher) {
+  const matches = [];
+  for (let i = 1; i < data.length; i++) {
+    const row = data[i];
+    const primary = row[headers.primary_name];
+    const secondary = row[headers.secondary_name];
+    if (matcher(name, primary)) {
+      matches.push({ index: i, field: 'primary', matchedName: String(primary || '').trim() });
+    } else if (matcher(name, secondary)) {
+      matches.push({ index: i, field: 'secondary', matchedName: String(secondary || '').trim() });
+    }
+  }
+  return matches;
+}
+
 function handleLookup(name) {
   if (!name || !String(name).trim()) {
     logEvent('warn', 'lookup_failed', { reason: 'empty_name' });
@@ -114,32 +141,51 @@ function handleLookup(name) {
   const sheet = getSheet();
   const headers = getHeaderMap(sheet);
   const data = sheet.getDataRange().getValues();
+  const searched = String(name).trim();
 
-  for (let i = 1; i < data.length; i++) {
-    const row = data[i];
-    const primary = row[headers.primary_name];
-    const secondary = row[headers.secondary_name];
-    if (namesMatch(name, primary) || namesMatch(name, secondary)) {
-      const submittedAt = row[headers.submitted_at];
-      const result = {
-        found: true,
-        rowIndex: i + 1,
-        primary: String(primary || '').trim(),
-        secondary: secondary ? String(secondary).trim() : null,
-        welcomeInvited: isTruthy(row[headers.welcome_invited]),
-        alreadySubmitted: !!submittedAt,
-      };
-      logEvent('info', 'lookup_success', {
-        searched: String(name).trim(),
-        matched: result.primary,
-        rowIndex: result.rowIndex,
-        alreadySubmitted: result.alreadySubmitted,
-      });
-      return result;
-    }
+  let matchType = 'exact';
+  let matches = findMatches(data, headers, name, namesMatchExact);
+  if (matches.length === 0) {
+    matchType = 'fuzzy';
+    matches = findMatches(data, headers, name, namesMatch);
   }
-  logEvent('warn', 'lookup_failed', { reason: 'not_found', searched: String(name).trim() });
-  return { found: false };
+
+  if (matches.length === 0) {
+    logEvent('warn', 'lookup_failed', { reason: 'not_found', searched: searched });
+    return { found: false };
+  }
+
+  if (matches.length > 1) {
+    logEvent('warn', 'lookup_ambiguous', {
+      searched: searched,
+      matchType: matchType,
+      candidates: matches.map(m => m.matchedName + ' (row ' + (m.index + 1) + ')'),
+    });
+    return { found: false, ambiguous: true };
+  }
+
+  const match = matches[0];
+  const row = data[match.index];
+  const primary = row[headers.primary_name];
+  const secondary = row[headers.secondary_name];
+  const result = {
+    found: true,
+    rowIndex: match.index + 1,
+    primary: String(primary || '').trim(),
+    secondary: secondary ? String(secondary).trim() : null,
+    welcomeInvited: isTruthy(row[headers.welcome_invited]),
+    alreadySubmitted: !!row[headers.submitted_at],
+  };
+  logEvent('info', 'lookup_success', {
+    searched: searched,
+    matchType: matchType,
+    matchedField: match.field,
+    matchedName: match.matchedName,
+    household: result.primary + (result.secondary ? ' & ' + result.secondary : ''),
+    rowIndex: result.rowIndex,
+    alreadySubmitted: result.alreadySubmitted,
+  });
+  return result;
 }
 
 function handleSubmit(payload) {

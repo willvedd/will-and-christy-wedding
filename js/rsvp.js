@@ -177,7 +177,9 @@ lookupForm.addEventListener('submit', async (e) => {
         if (!result.found) {
             showInlineError(
                 lookupError,
-                `We couldn't find that name. Try the name exactly as it appears on your invitation, or email ${CONTACT_EMAIL}.`
+                result.ambiguous
+                    ? `We found more than one guest by that name. Please email ${CONTACT_EMAIL} and we'll get you sorted.`
+                    : `We couldn't find that name. Try the name exactly as it appears on your invitation, or email ${CONTACT_EMAIL}.`
             );
             return;
         }
